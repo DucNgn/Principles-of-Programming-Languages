@@ -1,0 +1,9 @@
+\section{Example to demonstrate LaTeX}
+
+Here is an example for the latex file
+
+\begin{lstlisting}
+all_sections(CNAM, CNUM, L) :- 
+findall(L, takes_course(_, CNAM, CNUM, L), X),
+sort(X, L).
+\end{lstlisting}
