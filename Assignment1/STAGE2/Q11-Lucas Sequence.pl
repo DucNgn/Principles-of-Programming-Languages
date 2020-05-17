@@ -1,6 +1,6 @@
 % base cases
-lucas(1, 2).
-lucas(2, 1).
+lucas(1, [2]).
+lucas(2, [1,2]).
 
 % recursion
-lucas(N, Solution) :- N > 2, N_1 is N-1, N_2 is N-2, lucas(N_1, Solution1), lucas(N_2, Solution2), Solution is Solution1+Solution2.
+lucas(N, [L1,L2,L3|T]) :- N > 2, N1 is N - 1, lucas(N1, [L2,L3|T]), L1 is L2 + L3.
