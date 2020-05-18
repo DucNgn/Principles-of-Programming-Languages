@@ -82,7 +82,7 @@ childrenHaveGreaterIncome(family(X,Y,Z), ParentsIncome, KidsIncome):-
 
 
 /* Query to print family details of each family that has income per family less than 2000: 
-?- averageIncomeUnder(X, Y), (Avg<2000).
+?- averageIncomeUnder(X, Y), (Y<2000).
 
 */
 
