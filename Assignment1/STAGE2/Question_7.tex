@@ -268,7 +268,7 @@ false.
 
 \subsection{? lab\_number(\_,X), field(X,Y).}
 \textbf{Query type: } non-ground. \\
-\textbf{Output:} false.
+\textbf{Output:} false. \\
 \textbf{Steps:}
 \begin{itemize}
     \item \textbf{Unify} with the head of rule:
@@ -283,6 +283,7 @@ false.
 \end{itemize}
 
 
+\newpage
 \subsection{? lab\_number(X,15), field(X,Y).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} \\
@@ -308,16 +309,168 @@ false.
 \item Get output: X = mechanical; Y = engineering
 \end{itemize}
 
+\textbf{Steps when unify with rule:}
+\begin{itemize}
+    \item \textbf{Unify} with the head of rules:
+    \begin{lstlisting}
+    lab_number(X, Z) :-course(X, Y), lab_number(Y, Z).
+    field(X, Y) :- course(X, Z), field(Z, Y).
+    \end{lstlisting}
+    \item \textbf{Instantiate} 15 to Z.
+    \item \textbf{Resolve} into 2 goals:
+    \begin{lstlisting}
+    course(X, Y), lab_number(Y, 15).
+    course(X, Z), field(Z, Y).
+    \end{lstlisting}
+\item Evaluate both goals results in unification as followed:
+    \begin{lstlisting}
+    course(hit_transfer, mechanical), lab_number(mechanical, 15), field(mechanical, engineering).
+    \end{lstlisting}
+\item Thus, the output for this evaluation is: X = hit\_transfer, Y = engineering.
+\end{itemize}
+
 
 \subsection{? student(X), !, student(X,\_). } 
 \textbf{Query type: } non-ground. \\
-
+\textbf{Output:} 
+\begin{lstlisting}
+X = anna ;
+X = anna ;
+false.
+\end{lstlisting}
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} with the head of rule:
+    \begin{lstlisting}
+    student(X):- student(X,_).
+    \end{lstlisting}
+    \item \textbf{Resolve} the goal:
+    \begin{lstlisting}
+    student(X, _).
+    \end{lstlisting}
+\item Evaluate the goal and found the first result of: X = Anna.
+\item Encounter !, stop evaluating.
+\item Continue to the thrid goal, \textbf{Instantiate} X with Anna from the first goal.
+\item \textbf{Unify} with the head of rule:
+    \begin{lstlisting}
+    student(X, Y) :- field(Z, Y), student(X, Z).
+    \end{lstlisting}
+\item \textbf{Instantiate} X with Anna.
+\item \textbf{Resolve} into 2 goals:
+    \begin{lstlisting}
+    field(Z, Y), student(Anna, Z).
+    \end{lstlisting}
+\item Evaluate the goals, results in X = Anna proves true.
+\end{itemize}
 
 \subsection{? student(X), student(X,\_), !.}
 \textbf{Query type: } non-ground. \\
+\textbf{Output:} 
+\begin{lstlisting}
+   X = anna. 
+\end{lstlisting}
 
+\begin{itemize}
+    \item \textbf{Unify} with the rule:
+    \begin{lstlisting}
+    student(X):- student(X,_).
+    \end{lstlisting}
+    \item \textbf{Resolve} into 1 goal:
+    \begin{lstlisting}
+    student(X, _).
+    \end{lstlisting}
+    \item Evaluate and unify with student(anna, hit\_transfer)
+    \item \textbf{Instantiate} X with anna. Produce output: X = anna.
+    \item Reached the cut operator, stop.
+\end{itemize}
 
-\subsection{? course(X,\_), \\+ student(\_,X). } 
+\subsection{? course(X,\_), \textbackslash+ student(\_,X). } 
 \textbf{Query type: } non-ground. \\
+\textbf{Output:} 
+\begin{lstlisting}
+X = biology.
+\end{lstlisting}
 
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(hit_transfer, mechanical).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as hit\_transfer, 
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query will be unified with the fact:
+    \begin{lstlisting}
+    student(anna, hit_transfer).
+    \end{lstlisting}
+    \item the goals prove false. Backtracking..
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(web_design, computer).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as web\_design, 
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query will be unified with the fact:
+    \begin{lstlisting}
+    student(adrian, web_design).
+    \end{lstlisting}
+    \item the goals prove false. Backtracking..
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(design_methods, fine-arts).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as design\_methods.
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query will be unified with the fact:
+    \begin{lstlisting}
+    student(ava, design_methods).
+    \end{lstlisting}
+    \item the goals prove false. Backtracking..
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(poetry, literature).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as poetry.
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query will be unified with the fact:
+    \begin{lstlisting}
+    student(jack, poetry).
+    \end{lstlisting}
+    \item the goals prove false. Backtracking..
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(leadership, management).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as leadership.
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query will be unified with the fact:
+    \begin{lstlisting}
+    student(lee, leadership).
+    \end{lstlisting}
+    \item the goals prove false. Backtracking..
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} the first query firstly with the fact:
+    \begin{lstlisting}
+    course(biology, medicin).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X as biology.
+    \item \textbf{Resolve} the querry to be true.
+    \item The second query could not be unified with the any fact, produce false. 
+    \item Not false  = true.
+    \item the goals prove true. Hence, output: X = biology.
+\end{itemize}
 \newpage
