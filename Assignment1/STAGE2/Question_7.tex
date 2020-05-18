@@ -1,0 +1,323 @@
+\newpage
+\section{Question 7}
+\textbf{Output:} \\
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify}
+    \item \textbf{Instantiate}
+    \item \textbf{Resolve}
+\end{itemize}
+
+\subsection{field(hit\_transfer, engineering)}
+\textbf{Query type: } ground. \\
+\textbf{Output:} true \\
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of rule:
+    \begin{lstlisting}
+    field(X, Y) :- course(X, Z), field(Z, Y).
+    \end{lstlisting}
+    \item \textbf{Instantiate} \textit{X} to hit\_transfer, \textit{Y} to engineering.
+    \item \textbf{Resolve} to two new queries:
+    \begin{lstlisting}
+    course(hit\_transfer, Z), field(Z, engineering).
+    \end{lstlisting}
+\item Both queries are evaluated. 
+\item Both goals prove true $\to $ \textbf{succeeds}. Thus, the answer to the query is true. 
+\end{itemize}
+
+\subsection{? lab\_number(fine\_arts,X).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} 
+\begin{lstlisting}
+   X = 10;
+   false.
+\end{lstlisting}
+
+\textbf{Steps:} 
+\begin{itemize}
+    \item \textbf{Unify} with the head of fact:
+    \begin{lstlisting}
+    lab_number(fine_arts,10).
+    \end{lstlisting}
+\item \textbf{Instantiate} X to 10.
+\end{itemize}
+
+
+\subsection{? field(computer, literature).}
+\textbf{Query type: } ground. \\
+\textbf{Output:} false. \\
+
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of the rule:
+    \begin{lstlisting}
+    field(X, Y) :- course(X, Z), field(Z, Y).
+    \end{lstlisting}
+\item \textbf{Instantiate} \textit{computer} to \textit{X}, \textit{literature} to \textit{Y}.
+    \item \textbf{Resolve} to two new queries:
+    \begin{lstlisting}
+    course(computer, Z), field(Z, literature).
+    \end{lstlisting}
+\item Both queries are evaluated. Once the first goal succeeds, try the next one on the right with the same instantiation.
+\item After trying all possible cases, no cases prove true. The query is not successful.
+\end{itemize}
+
+
+\subsection{? course(X,Y).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:}
+\begin{lstlisting}
+X = hit_transfer, 
+Y = mechanical ; 
+X = web_design, 
+Y = computer ; 
+X = design_methods, 
+Y = fine-arts ; 
+X = poetry, 
+Y = literature ; 
+X = leadership, 
+Y = management ; 
+X = biology, 
+Y = medicin. 
+\end{lstlisting}
+
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} Unify with each statement of course() with 2 arities.
+    \item \textbf{Instantiate: } 
+    \begin{itemize}
+        \item X is intanciated as hit\_transfer, Y is intanciated as mechanical
+        \item X is intanciated as web\_design, Y is intanciated as computer
+        \item X is intanciated as design\_methods, Y is intanciated as fine-arts
+        \item X is intanciated as poetry, Y is intanciated as literature
+        \item X is intanciated as leadership, Y is intanciated as management
+        \item X is intanciated as biology, Y is intanciated as medicin
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{? student(adrian).}
+\textbf{Query type: } ground. \\
+\textbf{Output:} true. \\
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of the rule:
+    \begin{lstlisting}
+    student(X):- student(X,_).
+    \end{lstlisting}
+    \item \textbf{Instantiate} adrian to X.
+    \item \textbf{Resolve} into 1 goal:
+    \begin{lstlisting}
+    student(adrian, _).
+    \end{lstlisting}
+    \item The goal will be unified with 
+    \begin{lstlisting}
+    student(adrian, web_design).
+    \end{lstlisting}
+    \item The goal proves true.
+\end{itemize}
+
+\subsection{? student(anna, engineering).}
+\textbf{Query type: } ground. \\
+\textbf{Output:} true. \\
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of the rule:
+    \begin{lstlisting}
+    student(X, Y) :- field(Z, Y), student(X, Z).
+    \end{lstlisting}
+    \item \textbf{Instantiate } anna as X, engineering as Y.
+    \item \textbf{Resolve} to 2 new queries:
+    \begin{lstlisting}
+    field(Z, engineering), student(anna, Z).
+    \end{lstlisting}
+    \item Both goals are evaluated.
+    \item Both goals prove true with unification of:
+    \begin{lstlisting}
+    field(hit_transfer, engineering), student(anna, hit_transfer).
+    \end{lstlisting}
+\end{itemize}
+
+\newpage
+\subsection{? student(X, engineering).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} 
+\begin{lstlisting}
+X = anna ; 
+X = daniel ; 
+X = adrian ; 
+false. 
+\end{lstlisting}
+
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of the rule:
+    \begin{lstlisting}
+    student(X, Y) :- field(Z, Y), student(X, Z).
+    \end{lstlisting}
+    \item \textbf{Instantiate} engineering to Y.
+    \item \textbf{Resolve} to 2 goals:
+    \begin{lstlisting}
+    field(Z, engineering), student(X, Z).
+    \end{lstlisting}
+    \item The 2 goals are unified with:
+    \begin{lstlisting}
+    field(mechanical,engineering), student(X, mechanical).
+    field(computer, engineering), student(X, computer).
+    \end{lstlisting}
+    \item In each of the goal, there are further unifications and instantiations. The final is as belowed:
+    \begin{lstlisting}
+    field(mechanical,engineering), student(anna, mechanical).
+    field(mechanical,engineering), student(daniel, mechanical).
+    field(computer,engineering), student(adrian, computer).
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{? student(X,fine-arts), course(fine\_arts, Y).}
+\textbf{Note:} Assuming Y is X here. 
+
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} false.
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the query with the head of the rules:
+    \begin{lstlisting}
+    student(X, Y) :- field(Z, Y), student(X, Z).
+    \end{lstlisting}
+\item \textbf{Instantiate} fine-arts to Y.
+    \item \textbf{Resolve} to 2 goals:
+    \begin{lstlisting}
+    field(Z, fine-arts), student(X, Z).
+    and
+    course(fine\_arts, Y).
+    \end{lstlisting}
+    \item Resolve the first goal, got the result:
+    \begin{lstlisting}
+    field(design_methods, fine-arts), student(ava, design_methods).
+    \end{lstlisting}
+\item Evaluate the second goal with instantiation of Y as ava
+    \begin{lstlisting}
+    course(fine_arts,)
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{? field(\_,X).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} 
+\begin{lstlisting}
+X = engineering ;
+X = engineering ;
+X = art ;
+X = social ;
+X = buisiness ;
+X = engineering ;
+X = engineering ;
+X = art ;
+X = social ;
+X = buisiness ;
+false.
+\end{lstlisting}
+
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} with facts respectively:
+    \begin{lstlisting}
+    field(mechanical, engineering).
+    field(computer, engineering).
+    field(fine-arts, art).
+    field(literature, social).
+    field(management, buisiness).
+    \end{lstlisting}
+    \item \textbf{Instantiate} X to engineering.
+    \item \textbf{Instantiate} X to engineering.
+    \item \textbf{Instantiate} X to art.
+    \item \textbf{Instantiate} X to social.
+    \item \textbf{Instantiate} X to buisiness.
+    \item \textbf{Resolve}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Unify} with the head of rule:
+    \begin{lstlisting}
+    field(X, Y) :- course(X, Z), field(Z, Y).
+    \end{lstlisting}
+\item \textbf{Instantiate} X to all listed courses (hit\_transfer, web\_design, design\_methods, poetry, leadership, biology respectively).
+\item \textbf{Resolve} into 2 goals:
+    \begin{lstlisting}
+    course(X, Z), field(Z, Y).
+    \end{lstlisting}
+\item Evaluate both goals. The possible results are:
+    \begin{lstlisting}
+    course(hit_transfer, mechanical), field(mechanical, engineering). 
+    course(web_design, computer), field(computer, engineering).
+    course(design_methods, fine-arts), field(fine-arts, art).
+    course(poetry, literature), field(literature, social).
+    course(leadership, management), field(management, buisiness).
+    \end{lstlisting}
+\item Output of this part is as followed:
+    \begin{lstlisting}
+    X = engineering;
+    X = engineering;
+    X = art;
+    X = social;
+    X = buisiness;
+    \end{lstlisting}
+\end{itemize}
+
+
+\subsection{? lab\_number(\_,X), field(X,Y).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} false.
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} with the head of rule:
+    \begin{lstlisting}
+    lab_number(X, Z) :-course(X, Y), lab_number(Y, Z).
+    \end{lstlisting}
+    \item \textbf{Resolve} into 2 goals:
+    \begin{lstlisting}
+    course(X, Y), lab_number(Y, Z).
+    \end{lstlisting}
+    \item The two goals prove false as there is no possible case to unify.  
+\end{itemize}
+
+
+\subsection{? lab\_number(X,15), field(X,Y).}
+\textbf{Query type: } non-ground. \\
+\textbf{Output:} \\
+\begin{lstlisting}
+X = mechanical,
+Y = engineering ;
+X = hit_transfer,
+Y = engineering ;
+false.
+\end{lstlisting}
+
+\textbf{Steps:}
+\begin{itemize}
+    \item \textbf{Unify} the first goal with the fact:
+    \begin{lstlisting}
+    lab_number(mechanical,15).
+    \end{lstlisting}
+    \item \textbf{Instantiate} mechanical to X.
+    \item Unify the second goal with the fact:
+    \begin{lstlisting}
+    field(mechanical,engineering).
+    \end{lstlisting}
+\item Get output: X = mechanical; Y = engineering
+\end{itemize}
+
+
+\subsection{? student(X), !, student(X,\_). } 
+\textbf{Query type: } non-ground. \\
+
+
+\subsection{? student(X), student(X,\_), !.}
+\textbf{Query type: } non-ground. \\
+
+
+\subsection{? course(X,\_), \\+ student(\_,X). } 
+\textbf{Query type: } non-ground. \\
+
+\newpage
