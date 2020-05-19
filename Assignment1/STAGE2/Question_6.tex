@@ -1,0 +1,58 @@
+\section{Question 6:}
+Indicate which of the following pairs of terms can be uniﬁed together. If they can’t be uniﬁed, please provide the reason for it. In case of error, indicate the error. If they can be uniﬁed successfully, wherever relevant, provide the variable instantiations that lead to successful uniﬁcation. (Note that ‘:’ indicates uniﬁcation)
+
+\subsection{food(bread, X) = Food(Y, soup)}
+In this case, unification will not be successful since \textbf{food} is a functor and \textbf{Food} is not. For this unification to be successful, both sides would have to contain matching functors such as \textbf{food}.
+
+\subsection{Bread = soup}
+Since we have a variable and an atom, the variable will be instantiated to the value of the atom, thus the terms unify.
+
+\subsection{Bread = Soup}
+Since we have two variables, the variable will be instantiated to the value of the other variable or vice versa, thus the terms unify.
+
+\subsection{food(bread, X, milk) = food(Y, salad, X)}
+In this case the functors match, but the arguments do not. Y will be instantiated to 'bread', but X will be instantiated to either 'salad' or 'milk', meaning it cannot match with both of the atoms. This means the terms will not unify. If there were three variables, lets say X,Y,Z instead of X,Y,Y, then the terms would unify.
+
+\subsection{manager(X) = Y}
+In this case unification will be successful and \textbf{Y} will be instantiated to \textbf{manager(X)}.
+
+\subsection{meal(healthyFood(bread), drink(milk)) = meal(X,Y)}
+In this case unification will be successful with \textbf{X} instantiated to \textbf{healthyFood(bread)} and \textbf{Y} instantiated to \textbf{drink(milk)}.
+
+\subsection{meal(eat(Z), drink(milk)) = [X]}
+In this case, unification is not successful as the arities and functors do not match.
+
+\subsection{[eat(Z), drink(milk)] = [X, Y $\mid$ Z]}
+In this case unification is successful with \textbf{X} being instantiated to \textbf{eat([ ])}, \textbf{Y} being instantiated to \textbf{drink(milk)}, and \textbf{Z} being instantiated to \textbf{[ ]}.
+
+\subsection{f(X, t(b, c)) = f(l, t(Z, c))}
+In this case unification is successful with \textbf{X} being instantiated to \textbf{1}, and and \textbf{Z} being instantiated to \textbf{b}.
+
+\subsection{ancestor(french(jean), B) = ancestor(A, scottish(joe))}
+In this case unification is successful with \textbf{A} being instantiated to \textbf{french(jean)}, and and \textbf{B} being instantiated to \textbf{scottish(joe)}.
+
+\subsection{meal(healthyFood(bread), Y) = meal(X, drink(water))}
+In this case unification is successful with \textbf{X} being instantiated to \textbf{healthyFood(bread)}, and and \textbf{Y} being instantiated to \textbf{drink(water)}.
+
+\subsection{[H$\mid$T] = [a, b, c]}
+In this case unification is successful with \textbf{H} being instantiated to \textbf{a}, and \textbf{T} being instantiated to \textbf{[b, c]}.
+
+\subsection{[H, T] = [a, b, c]}
+In this case unification is not successful as the number of elements in the left list does not equal the number of elements in the right list. The list on the left would have to be composed of 3 variables for unification to be successful.
+
+\subsection{breakfast(healthyFood(bread), egg, milk) = breakfast (healthyFood(Y), Y, Z)}
+In this case unification is not successful as \textbf{Y} cannot be instantiated to both \textbf{bread} and \textbf{egg} at the same time.
+
+\subsection{dinner(X, Y, Time) = dinner(jack, cook( egg, oil), Evening)}
+In this case unification is successful with \textbf{X} being instantiated to \textbf{jack}, \textbf{Y} being instantiated to \textbf{cook(egg, oil)}, and \textbf{Time} being instantiated to \textbf{Evening}.
+
+\subsection{k(s(g), Y) = k(X, t(k))}
+In this case unification is successful with \textbf{X} being instantiated to \textbf{s(g)}, and  \textbf{Y} being instantiated to \textbf{t(k)}.
+
+\subsection{equation(Z, f(x, 17, M), L*M, 17) = equation(C, f(D, D, y), C, E)}
+In this case, unification is not successful as the term \textbf{f(x, 17, M)} does not unify with the term \textbf{f(D, D, y)}. These two terms do not unify as \textbf{D} cannot be instantiated to both \textbf{x} and \textbf{17} at the same time. 
+
+\subsection{a(X, b(c, d), [H$\mid$T]) = a(X, b(c, X), b)}
+In this case unification is not successful since \textbf{[H|T]} cannot unify with \textbf{b} since \textbf{b} is an atom.
+
+
