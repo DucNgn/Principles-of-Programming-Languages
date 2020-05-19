@@ -1,0 +1,18 @@
+\section{Question 10}
+
+\subsection{A. Implement the circuit}
+The detailed implementation is in file \textit{question-10.pl}
+
+\subsection{B. Query to calculate the outputs for S and C }
+
+\begin{lstlisting}
+?- circuit(0, _, S, C).
+\end{lstlisting}
+
+The output is as following:
+\begin{lstlisting}
+S = 1,
+C = 0;
+S = C, C = 0 ;
+false
+\end{lstlisting}
