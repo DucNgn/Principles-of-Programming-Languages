@@ -2,10 +2,10 @@
 
 \subsection{Explaination:}
 
-all_courses2('4000123', L) returns all the courses that the student with ID 4000123 has taken.
-But all_courses2(4000123, L) returns an empty list.
+all\_courses2('4000123', L) returns all the courses that the student with ID 4000123 has taken.
+But all\_courses2(4000123, L) returns an empty list.
 This is because when we wrote our knowledge base, we enforced student IDs to be in form of quoted atoms (we wrapped IDs in single quotation marks).
 However, in the second query, the student ID is a number, and a number cannot be unified with a
 quoted atom.
 Therefore, the second query returns an empty list because it can’t be unified with any of
-take_course statements ('4000123' = 4000123 is false).
+take\_course statements ('4000123' = 4000123 is false).
