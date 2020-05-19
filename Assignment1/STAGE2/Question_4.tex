@@ -1,0 +1,12 @@
+\section{Question 4}
+
+\subsection{Modified Query}
+\begin{lstlisting}
+team(X), member(S, X),
+|    findall([A,B], takes_course(S, A, B, _), L1),
+|    list_to_set(L1, L),
+|    length(L, NN),
+|    write(S), write('has taken'), write(NN),
+|    write(' course '), nl, fail.
+\end{lstlisting}
+
