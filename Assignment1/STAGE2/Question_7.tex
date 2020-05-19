@@ -269,15 +269,14 @@ false.
 \textbf{Output:} false. \\
 \textbf{Steps:}
 \begin{itemize}
-    \item \textbf{Unify} with the head of rule:
+    \item \textbf{Unify} with the facts respectively:
     \begin{lstlisting}
-    lab_number(X, Z) :-course(X, Y), lab_number(Y, Z).
+    lab_number(mechanical,15).
+    lab_number(fine_arts,10).  
     \end{lstlisting}
-    \item \textbf{Resolve} into 2 goals:
-    \begin{lstlisting}
-    course(X, Y), lab_number(Y, Z).
-    \end{lstlisting}
-    \item The two goals prove false as there is no possible case to unify.  
+\item This will \textbf{instantiate} X with a number, either 10 or 15.
+\item However, both will prove false in the second query when field(X, Y) is instantiated and resolved to either field(15, Y) or field(10, Y).
+\item Thus, Prolog outputs false.
 \end{itemize}
 
 % Part 11
