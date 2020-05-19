@@ -1,0 +1,43 @@
+\newpage
+\section{Question 8}
+
+\subsection{? magic(Hermione)}
+In this non ground query, we will find all atoms such that they satisfy magic(Hermione). 
+ First,
+magic(Hermione) is unified with the head of the rule magic(X):- house\_elf(X). So X is instantiated to Hermione.
+ Through resolution, we go to the body of the rule and house\_elf(Hermione) is now our goal to satisfy and it is treated as a new non ground query.
+ We have house\_elf(dobby) in our knowledge base
+so house\_elf(Hermione) unifies with house\_elf(dobby) and Hermione is instantiated to dobby so dobby satisfies our goal and thus it is one answer to the initial query. \\
+
+There are no more answers for house\_elf(Hermione), so using backtracking, we reach the next rule for
+magic(X). magic(Hermione) is unified with the head of the rule magic(X):- wizard(X). So X is instantiated
+to Hermione. Then in the resolution step, wizard(Hermione) is now our goal to satisfy. We have
+wizard(dobby) in our knowledge base so wizard\_elf(Hermione) unifies with wizard(dobby) and
+Hermione is instantiated to dobby so dobby is another answer of the query.\\
+
+There are no more answers for wizard(Hermione), so using backtracking, we reach the next rule for
+magic(X). magic(Hermione) is unified with the head of the rule magic(X):- witch(X). X is instantiated to
+Hermione. Then in the resolution step, we make a transition to the body of the rule and
+witch(Hermione) is now our goal to satisfy. We have witch(hermione), witch(mcGonagall) and
+witch(rita\_skeeter) in our knowledge base so Hermione is first instantiated hermione and when we
+continue the search, there are other answers mcGonagall and rita\_skeeter to the non groud query
+witch(Hermione). Through backtracking, we can see that there is no other answer for our initial query.
+\\
+The final answer to the query is:
+\begin{lstlisting}
+Hermione = dobby;
+Hermione = dobby;
+Hermione = hermione;
+Hermione = mcGonagall;
+Hermione = rita_skeeter;
+\end{lstlisting}
+
+\subsection{? magic(hermione)}
+This is a ground query, so we expect either true or false as an answer. First, Prolog searches the
+database from top to bottom. It matches the query with head of the rule magic(X):- house\_elf(X). So X is
+instantiated to hermione. Now our goal is house\_elf(hermione) (through resolution) and we treat it as a
+new ground query. We can see that house\_elf(hermione) cannot match any clause in our database so
+we go to the next rule through backtracking: magic(X):- wizard(X). Now X is instantiated to hermione. In
+the resolution step, we make a transition to the body of the rule and our goal is to satisfy (find) wizard(hermione). We can clearly see in the database that hermione is a wizard so the result of our goal
+query (?- wizard(hermione).) is true. Therefore we can tell that the initial query also returns true.
+
