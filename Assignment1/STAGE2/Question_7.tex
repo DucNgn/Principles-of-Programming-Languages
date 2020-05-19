@@ -1,6 +1,7 @@
 \newpage
 \section{Question 7}
 
+% Part 1
 \subsection{field(hit\_transfer, engineering)}
 \textbf{Query type: } ground. \\
 \textbf{Output:} true \\
@@ -19,6 +20,7 @@
 \item Both goals prove true $\to $ \textbf{succeeds}. Thus, the answer to the query is true. 
 \end{itemize}
 
+% Part 2
 \subsection{? lab\_number(fine\_arts,X).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
@@ -36,7 +38,7 @@
 \item \textbf{Instantiate} X to 10.
 \end{itemize}
 
-
+% Part 3
 \subsection{? field(computer, literature).}
 \textbf{Query type: } ground. \\
 \textbf{Output:} false. \\
@@ -56,7 +58,7 @@
 \item After trying all possible cases, no cases prove true. The query is not successful.
 \end{itemize}
 
-
+% Part 4
 \subsection{? course(X,Y).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:}
@@ -89,7 +91,7 @@ Y = medicin.
     \end{itemize}
 \end{itemize}
 
-
+% Part 5
 \subsection{? student(adrian).}
 \textbf{Query type: } ground. \\
 \textbf{Output:} true. \\
@@ -111,6 +113,7 @@ Y = medicin.
     \item The goal proves true.
 \end{itemize}
 
+% Part 6
 \subsection{? student(anna, engineering).}
 \textbf{Query type: } ground. \\
 \textbf{Output:} true. \\
@@ -133,6 +136,7 @@ Y = medicin.
 \end{itemize}
 
 \newpage
+% Part 7
 \subsection{? student(X, engineering).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
@@ -167,34 +171,35 @@ false.
     \end{lstlisting}
 \end{itemize}
 
+% Part 8
 \subsection{? student(X,fine-arts), course(fine\_arts, Y).}
-\textbf{Note:} Assuming Y is X here. 
-
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} false.
 \textbf{Steps:}
 \begin{itemize}
-    \item \textbf{Unify} the query with the head of the rules:
+    \item \textbf{Unify} the first query with the head of rule:
     \begin{lstlisting}
     student(X, Y) :- field(Z, Y), student(X, Z).
     \end{lstlisting}
 \item \textbf{Instantiate} fine-arts to Y.
-    \item \textbf{Resolve} to 2 goals:
+\item \textbf{Resolve} into 2 goals:
     \begin{lstlisting}
-    field(Z, fine-arts), student(X, Z).
-    and
-    course(fine\_arts, Y).
+    field(Z, fine-arts), student(X, Z)
     \end{lstlisting}
-    \item Resolve the first goal, got the result:
+\item \textbf{Unify} the first goal with the head of rule:
     \begin{lstlisting}
-    field(design_methods, fine-arts), student(ava, design_methods).
+    field(X, Y) :- course(X, Z), field(Z, Y).
     \end{lstlisting}
-\item Evaluate the second goal with instantiation of Y as ava
+\item \textbf{Instantiate} Y with fine-arts.
+\item \textbf{Resolve} into 2 goals:
     \begin{lstlisting}
-    course(fine_arts,)
+    course(X, Z), field(Z, fine-arts).
     \end{lstlisting}
+\item $\ldots$
+\item This is actually a recursion that will never end. Eventually, Prolog will result in \textit{false} after exausting the knowledge base.
 \end{itemize}
 
+% Part 9
 \subsection{? field(\_,X).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
@@ -258,7 +263,7 @@ false.
     \end{lstlisting}
 \end{itemize}
 
-
+% Part 10
 \subsection{? lab\_number(\_,X), field(X,Y).}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} false. \\
@@ -275,7 +280,7 @@ false.
     \item The two goals prove false as there is no possible case to unify.  
 \end{itemize}
 
-
+% Part 11
 \newpage
 \subsection{? lab\_number(X,15), field(X,Y).}
 \textbf{Query type: } non-ground. \\
@@ -322,7 +327,7 @@ false.
 \item Thus, the output for this evaluation is: X = hit\_transfer, Y = engineering.
 \end{itemize}
 
-
+% Part 12
 \subsection{? student(X), !, student(X,\_). } 
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
@@ -356,6 +361,7 @@ false.
 \item Evaluate the goals, results in X = Anna proves true.
 \end{itemize}
 
+% Part 13
 \subsection{? student(X), student(X,\_), !.}
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
@@ -377,6 +383,7 @@ false.
     \item Reached the cut operator, stop.
 \end{itemize}
 
+% Part 14
 \subsection{? course(X,\_), \textbackslash+ student(\_,X). } 
 \textbf{Query type: } non-ground. \\
 \textbf{Output:} 
