@@ -1,7 +1,7 @@
 (defun take-n (lst n)
   (cond 
     ((< n 1) nil)
-    ((> n (list-length lst)) lst)
+    ((> n (list-length lst)) (copy-list lst))
     ( t (let 
         ((i (- (list-length lst) n)))
         (getListAfter lst i)))))
