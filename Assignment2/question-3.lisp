@@ -22,3 +22,6 @@
 
 (remove2 (flattenonly l))
 )
+;;Testing
+ (format t "(flatten '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))) will output: ~a ~%" (flatten '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
+  (format t "(flatten '(c 8.5 (1 3 1 (4)) (((66 no))))) will output: ~a ~%" (flatten '(c 8.5 (1 3 1 (4)) (((66 no))))))
