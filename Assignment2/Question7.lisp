@@ -2,7 +2,7 @@
 (defun collatz (input)
     (setq n (car input))
     (setq output '())
-    (if (plusp n) 
+    (if (> n 0) 
         (generatelist n output)
         (print (Please enter a valid number))
      )
@@ -12,7 +12,7 @@
 (defun generatelist (num modifiedlist)
     (if (not (= 1 num))
         (progn
-            (if (evenp num)
+            (if (= 0 (rem num 2))
                  (setq x (/ num 2))
                  (setq x (+ 1 (* 3 num))))
              (setf output (cons x modifiedlist))
