@@ -1,12 +1,13 @@
-
 (defun collatz (input)
     (setq n (car input))
     (setq output '())
-    (if (> n 0) 
-        (generatelist n output)
-        (print (Please enter a valid number))
+    (cond 
+        ((> n 1) (generatelist n output))
+        ((= n 1) (print '(1)))
+        ((< n 1) (print "Please enter a valid number"))
      )
-    (print (reverse output))
+    (if (not (eql output '()))
+        (print (reverse output)))
     )
 
 (defun generatelist (num modifiedlist)
@@ -19,6 +20,8 @@
              (generatelist x output))
      )
  )
+
+
 
 (setf twentynumbers '((1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12) (13) (14) (15) (16) (17) (18) (19) (20)))
 (loop for x in twentynumbers
