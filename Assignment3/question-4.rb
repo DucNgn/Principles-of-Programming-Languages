@@ -89,8 +89,3 @@ class Ellipse < Shape
   end
 
 end
-
- 
-test = Circle.new(2)
-test.print
-
