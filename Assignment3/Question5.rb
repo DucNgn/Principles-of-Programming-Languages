@@ -7,7 +7,7 @@ for element in a
   if info[0] == "rectangle" 
     if info.length == 3 and info[1].to_i >=0 and info[2].to_i >=0
       r = Rectangle.new(info[1].to_i,info[2].to_i)
-      r.print
+      r.print()
     else 
       puts "Invalid Rectangle"
     end
@@ -25,7 +25,7 @@ for element in a
   elsif info[0] == "ellipse" 
     if info.length == 3 and info[1].to_i >=0 and info[2].to_i >=0 and info[2].to_i >= info[1].to_i
       e = Ellipse.new(info[2].to_i,info[1].to_i)
-      puts "Ellipse, perimeter: undefined" + ", area: "+e.area().to_s
+      e.print()
     else 
       puts "Invalid Ellipse"
     end
@@ -34,7 +34,7 @@ for element in a
   elsif info[0] == "shape" 
     if info.length == 1
       s = Shape.new()
-      puts "Shape, perimeter: undefined, area: undefined"
+      s.print()
     else 
       puts "Invalid Shape"
     end
