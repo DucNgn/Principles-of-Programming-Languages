@@ -102,7 +102,7 @@ for element in a
             r = Rectangle.new(info[1].to_i,info[2].to_i)
             Statistics[:Rectangles] = Statistics[:Rectangles] + 1
             Statistics[:Shapes] = Statistics[:Shapes] + 1
-            r.print
+            r.print()
         else 
             puts "Invalid Rectangle"
         end
@@ -124,7 +124,7 @@ elsif info[0] == "ellipse"
         e = Ellipse.new(info[2].to_i,info[1].to_i)
         Statistics[:Ellipses] = Statistics[:Ellipses] + 1
         Statistics[:Shapes] = Statistics[:Shapes] + 1
-        puts "Ellipse, perimeter: undefined" + ", area: "+e.area().to_s
+        e.print()
     else 
         puts "Invalid Ellipse"
     end
@@ -134,7 +134,7 @@ elsif info[0] == "shape"
     if info.length == 1
         s = Shape.new()
         Statistics[:Shapes] = Statistics[:Shapes] + 1
-        puts "Shape, perimeter: undefined, area: undefined"
+        s.print()
     else 
         puts "Invalid Shape"
     end
