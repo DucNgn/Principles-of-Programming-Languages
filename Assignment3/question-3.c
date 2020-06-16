@@ -2,59 +2,69 @@
 #include <stdlib.h>
 
 typedef struct {
-    char *title[50];
+    char *title;
     float price;
 } Book;
 
 void Display(Book* lib, int n);
 float AverageBookPrice(Book* lib, int n);
-Book* add(Book* lib, Book newBook, int size);
+void add(Book **lib, Book newBook, int * size);
 
 int main() {
-    int n;
+    int size;
     printf("Enter the number of books:\n" );
-    scanf("%d", &n);
-    if(n <= 0) {
+    scanf("%d", &size);
+    if(size <= 0) {
         printf("Invalid number of book.");
         return 1;
     }
 
-    Book *lib = (Book *) malloc(n * sizeof(Book));
+    Book *lib = (Book *) malloc(size * sizeof(Book));
     if(lib == NULL) {
         printf("The memory is full");
-        return 1;
+        exit(0);
     }
 
-    for(int i = 0; i < n; ++i) {
-        char title[50];
-        float price;
+    for(int i = 0; i < size; ++i) {
+        lib[i].title = (char*) malloc(50);
+        if(lib[i].title == NULL) {
+            printf("The memory for title is full");
+            exit(0);
+        } 
+
         printf("Book no.%d\n", i);
         printf("Book Title: ");
-        scanf("%s", title);
+        scanf("%s", lib[i].title);
         printf("Book Price: ");
-        scanf("%f", &price);
+        scanf("%f", &lib[i].price);
         printf("\n");
-        *(lib+i)->title = title;
-        (lib+i)->price = price;
     }
 
-    Display(lib, n);
-    printf("Average Price = $%f", AverageBookPrice(lib, n));
-
+    Display(lib, size);
+    printf("Average Price = $%f", AverageBookPrice(lib, size));
+    
     Book test;
-    char testT[50]= "test";
-    *(test.title) = testT;
-    (test.price) = 999.9;
+    test.title = (char*) malloc(50);
+    test.title = "Sample Book";
+    test.price = 1.0;
 
+    add2(&lib, test, &size);
+    Display(lib, size);
+
+    for(int i = 0; i < size; i++) {
+        free((lib + i)->title);
+    }
+
+    free(lib);
     return 0;
 }
 
 void Display(Book* lib, int n) {
-    printf("----Displaying----\n");
+    printf("\n----Displaying----\n");
     for(int i = 0; i < n; i++) {
         printf("Book no.%d\n", i);
-        printf("Book Title: %s\n", (*(lib + i)->title));
-        printf("Book Price: $%f\n", ((lib + i)->price));
+        printf("Book Title: %s\n", (lib + i)->title);
+        printf("Book Price: $%f\n", (lib + i)->price);
         printf("\n");
     }
 }
@@ -67,22 +77,16 @@ float AverageBookPrice(Book* lib, int n){
     return (sum / n);
 }
 
-Book* add(Book* lib, Book newBook, int size) {
-    int n = size + 1;
-    Book* newLib = (Book *) malloc(n * sizeof(Book));
-    if(newLib == NULL) {
+void add(Book **lib, Book newBook, int * size) {
+    *size = *size + 1;
+    *lib = (Book*)realloc(*lib, *size * sizeof(Book));
+    if(*lib == NULL) {
         printf("The memory is full");
-        return NULL;
+        *size = *size - 1;
+        return;
     }
 
-    for(int i = 0; i < size; i++) {
-        *(newLib + i)->title = *(lib + i)->title;
-        (newLib + i)->price = (lib + i)->price;
-    }
-
-    *(newLib + n)->title = *(newBook.title);
-    (newLib+n)->price = newBook.price;
-
-    free(lib);
-    return newLib;
+    (*lib + *size - 1)->title = (char *) malloc(50);
+    (*lib + *size - 1)->title = newBook.title;
+    (*lib + *size - 1)->price = newBook.price;
 }
