@@ -3,8 +3,8 @@ class Shape
 
   def initialize
     @name = "Shape"
-    @perimeter = 0
-    @area = 0
+    @perimeter = "undefined"
+    @area = "undefined"
   end 
 
   def print
@@ -48,8 +48,13 @@ class Rectangle < Shape
     @name = "Rectangle"
     @height = height
     @width = width
-    perimeter()
-    area()
+    if(height == 0 || width == 0) 
+      @perimeter = 0
+      @area = 0
+    else
+      perimeter()
+      area()
+    end
   end
 
   def perimeter
@@ -75,17 +80,13 @@ class Ellipse < Shape
   end
 
   def eccentricity
-    @e = Math.sqrt(@a**2 - @b**2)
+    @e = Math.sqrt((@a**2 - @b**2).abs)
     @e
   end
 
   def area
     @area = Math::PI * @a* @b
     @area
-  end
-
-  def print
-    puts "#@name, eccentricity: #@e, area: #@area"
   end
 
 end
