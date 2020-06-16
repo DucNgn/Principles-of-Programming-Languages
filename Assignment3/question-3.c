@@ -48,7 +48,7 @@ int main() {
     test.title = "Sample Book";
     test.price = 1.0;
 
-    add2(&lib, test, &size);
+    add(&lib, test, &size);
     Display(lib, size);
 
     for(int i = 0; i < size; i++) {
