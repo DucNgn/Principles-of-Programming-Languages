@@ -1,7 +1,9 @@
 class Shape
   attr_accessor :name
+  @@shape_count = 0
 
   def initialize
+    @@shape_count += 1
     @name = "Shape"
     @perimeter = "undefined"
     @area = "undefined"
@@ -9,6 +11,14 @@ class Shape
 
   def print
     puts "#@name, perimeter: #@perimeter, area: #@area"
+  end
+
+  def self.getShapeCtr
+    @@shape_count
+  end
+
+  def self.getCtr
+    nil
   end
 
   def perimeter
@@ -22,12 +32,19 @@ class Shape
 end
 
 class Circle < Shape
+  @@circle_count = 0
+
   def initialize(radius)
     super()
+    @@circle_count += 1
     @name = "Circle"
     @r = radius
     perimeter()
     area()
+  end
+
+  def self.getCtr
+    @@circle_count
   end
 
   def perimeter
@@ -43,8 +60,10 @@ end
 
 
 class Rectangle < Shape
+  @@rectangle_count = 0
   def initialize(height, width)
     super()
+    @@rectangle_count += 1
     @name = "Rectangle"
     @height = height
     @width = width
@@ -55,6 +74,10 @@ class Rectangle < Shape
       perimeter()
       area()
     end
+  end
+
+  def self.getCtr
+    @@rectangle_count
   end
 
   def perimeter
@@ -69,14 +92,20 @@ class Rectangle < Shape
 end
 
 class Ellipse < Shape
+  @@ellipse_count = 0
   attr_accessor :e
   def initialize(a, b)
     super()
+    @@ellipse_count += 1
     @name = "Ellipse"
     @a = a
     @b = b
     eccentricity()
     area()
+  end
+
+  def self.getCtr
+    @@ellipse_count
   end
 
   def eccentricity

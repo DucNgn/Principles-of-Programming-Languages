@@ -1,3 +1,5 @@
+require './question-4.rb'
+
 a = []
 File.open("Information.txt").each {|line| a.push(line)}
 
@@ -9,7 +11,7 @@ for element in a
       r = Rectangle.new(info[1].to_i,info[2].to_i)
       r.print()
     else 
-      puts "Invalid Rectangle"
+      puts "Error: Invalid Rectangle"
     end
   
 
@@ -18,7 +20,7 @@ for element in a
       c = Circle.new(info[1].to_i)
       c.print()
     else 
-      puts "Invalid Circle"
+      puts "Error: Invalid Circle"
     end
   
 
@@ -27,7 +29,7 @@ for element in a
       e = Ellipse.new(info[2].to_i,info[1].to_i)
       e.print()
     else 
-      puts "Invalid Ellipse"
+      puts "Error: Invalid Ellipse"
     end
   
 
@@ -36,7 +38,7 @@ for element in a
       s = Shape.new()
       s.print()
     else 
-      puts "Invalid Shape"
+      puts "Error: Invalid Shape"
     end
   end
 
