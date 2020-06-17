@@ -8,7 +8,7 @@ typedef struct {
 
 void Display(Book* lib, int n);
 float AverageBookPrice(Book* lib, int n);
-void add(Book **lib, Book newBook, int * size);
+void add(Book **lib, int * size);
 
 int main() {
     int size;
@@ -43,12 +43,7 @@ int main() {
     Display(lib, size);
     printf("Average Price = $%f", AverageBookPrice(lib, size));
     
-    Book test;
-    test.title = (char*) malloc(50);
-    test.title = "Sample Book";
-    test.price = 1.0;
-
-    add(&lib, test, &size);
+    add(&lib, &size);
     Display(lib, size);
 
     for(int i = 0; i < size; i++) {
@@ -77,7 +72,8 @@ float AverageBookPrice(Book* lib, int n){
     return (sum / n);
 }
 
-void add(Book **lib, Book newBook, int * size) {
+void add(Book **lib, int * size) {
+    printf("\n\n### Adding a new book: ###");
     *size = *size + 1;
     *lib = (Book*)realloc(*lib, *size * sizeof(Book));
     if(*lib == NULL) {
@@ -87,6 +83,9 @@ void add(Book **lib, Book newBook, int * size) {
     }
 
     (*lib + *size - 1)->title = (char *) malloc(50);
-    (*lib + *size - 1)->title = newBook.title;
-    (*lib + *size - 1)->price = newBook.price;
+    printf("\nBook Title: ");
+    scanf("%s", (*lib + *size - 1)->title );
+    printf("Book Price: ");
+    scanf("%f", &((*lib + *size - 1)->price));
+    printf("\n");
 }
