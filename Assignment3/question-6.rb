@@ -1,7 +1,7 @@
 require './question-4.rb'
 require './question-5.rb'
 
-Statistics = {:Shapes => Shape.getShapeCtr, :Rectangles => Rectangle.getCtr, :Circles => Circle.getCtr, :Ellipses => Ellipse.getCtr}
+Statistics = {:Shapes => Shape.getCtr, :Rectangles => Rectangle.getCtr, :Circles => Circle.getCtr, :Ellipses => Ellipse.getCtr}
 
 puts "\nStatistics: "
 puts "  Shape(s): " + Statistics[:Shapes].to_s

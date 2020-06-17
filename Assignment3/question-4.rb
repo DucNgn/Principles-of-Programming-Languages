@@ -13,12 +13,8 @@ class Shape
     puts "#@name, perimeter: #@perimeter, area: #@area"
   end
 
-  def self.getShapeCtr
-    @@shape_count
-  end
-
   def self.getCtr
-    nil
+    @@shape_count 
   end
 
   def perimeter
